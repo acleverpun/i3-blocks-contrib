@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+################################
+# Shows info from media players.
+#
+# Dependencies:
+# - playerctl
+################################
+
+
 # Exit if no player found
 players=`playerctl -l`
 if [[ ! $players ]]; then exit 0; fi
@@ -33,7 +41,7 @@ isPlaying() {
 if isPlaying; then echo -n "  "; fi
 
 
-echo "$artist - $title, $album $icon"
+echo "$album: $artist - $title $icon"
 echo "$artist - $title $icon"
 
 

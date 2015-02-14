@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+################################
+# Shows packages that need updated.
+#
+# Dependencies:
+# - yaourt
+################################
+
+
 # Refresh package lists
 yaourt -Syy
 

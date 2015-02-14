@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 
-# Grabs and prints information about sound/volume
+################################
+# Shows info about sound/volume.
+# Allows simple volume controls.
+#
+# Dependencies:
+# - amixer
+# - pulseaudio-ctl
+################################
 
 
 getVolume() {

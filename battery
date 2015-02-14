@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
 
-# Grabs and prints information about the battery (if present)
+################################
+# Shows info about connected batteries.
+#
+# Dependencies:
+# - acpi
+################################
 
+
+# Exit if no battery was found
 if [ "$(acpi)" == "" ]; then exit 0; fi
 
 

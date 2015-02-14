@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+################################
+# Shows current keyboard layout.
+# Allows layout toggling.
+#
+# Dependencies:
+# - [Ross' key script](https://github.com/rosshadden/dotfiles/blob/master/src/lib/keys.sh)
+################################
+
+
 layout=`$HOME/bin/keys get`
 
 echo $layout
