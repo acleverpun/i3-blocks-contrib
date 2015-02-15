@@ -9,7 +9,7 @@
 
 
 # Refresh package lists
-yaourt -Syy
+yaourt -Sya
 
 
 arch=$(yaourt -Qu | wc -l)

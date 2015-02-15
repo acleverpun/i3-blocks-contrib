@@ -5,29 +5,29 @@
 # Allows simple volume controls.
 #
 # Dependencies:
-# - amixer
 # - pulseaudio-ctl
 ################################
 
 
-getPlaybackInfo() {
-    amixer get $BLOCK_INSTANCE | grep -P "Playback \d+ \[" | head -1
+getInfo() {
+    pulseaudio-ctl full-status | cut -f $1 -d ' '
 }
 
 
 getVolume() {
-    getPlaybackInfo | sed -n 's/^[^:]*: Playback [0-9]* \[\([0-9]*%\)\] .*/\1/p'
+    getInfo 1
 }
 
 
 isMuted() {
-    test=`getPlaybackInfo | sed -n 's/^[^:]*: Playback [0-9]* \[\([0-9]*%\)\].* \[\([a-z]*\)\]/\2/p'`
-    [[ $test != 'on' ]]
+    muteTest=`getInfo 2`
+    [[ $muteTest == 'yes' ]]
 }
 
 
 vol=`getVolume`
 
+# determine icon
 if [ $vol -eq 0 ]; then
     icon=
 else
@@ -40,6 +40,7 @@ fi
 
 echo "$icon $vol"
 
+# determine mute status
 if isMuted; then
     echo
     echo "#ff0000"
@@ -61,6 +62,7 @@ case $BLOCK_BUTTON in
 esac
 
 
+# Refresh the status
 if [[ $BLOCK_BUTTON ]]; then
     pkill -RTMIN+10 i3blocks
 fi
