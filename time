@@ -1,4 +1,13 @@
 #!/usr/bin/env bash
 
-date "+ %H:%M:%S"
-date "+ %H:%M"
+################################
+# Shows current time
+#
+# @param {String} format: The format of the time
+################################
+
+format=${BLOCK_INSTANCE:-"%H:%M:%S"}
+
+
+date +"$format"
+date +"%H:%M"

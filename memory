@@ -1,17 +1,33 @@
 #!/usr/bin/env bash
 
-# Grabs and prints information about RAM
+################################
+# Shows info about the RAM
+################################
+
+full=""
+short=""
+color=""
+status=0
+
 
 exec 6< /proc/meminfo
 read a total b <&6
 read a free b <&6
 
-MEM=$((100 * (total-free) / total ))
+
+MEM=$(echo "100 * ($total - $free) / $total" | bc)
 
 
-echo "$MEM%"
+full="$MEM%"
+short=$full
 
 if [ $MEM -ge 80 ]; then
-    echo '#ff0000'
-    exit 33
+    color="#ff0000"
+    status=33
 fi
+
+
+echo $full
+echo $short
+echo $color
+exit $status

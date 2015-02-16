@@ -7,6 +7,11 @@
 # - playerctl
 ################################
 
+full=""
+short=""
+color=""
+status=0
+
 
 # Exit if no player found
 players=`playerctl -l`
@@ -19,33 +24,32 @@ album=`playerctl metadata album`
 status=`playerctl status`
 
 
-# Handle when nothing is playing
-if [[ ! $title ]]; then
-    echo "Nothing playing"
-    exit 0
+if [[ $title ]]; then
+	# Determine which status icon to use
+	declare -A icons
+	icons=( ["Playing"]="" ["Paused"]="" ["Stopped"]="" )
+	icon=${icons[$status]}
+
+
+	if [[ $status == "Playing" ]]; then
+		# Add an icon if playing
+		echo -n "  "
+	else
+		# Use a different color if not playing
+		color="#fff000"
+	fi
+
+
+	full="$album: $artist - $title $icon"
+	short="$artist - $title $icon"
+else
+	# Handle when nothing is playing
+	full="Nothing playing"
+	short="∅"
 fi
 
 
-# Determine which status icon to use
-declare -A icons
-icons=( ["Playing"]="" ["Paused"]="" ["Stopped"]="" )
-icon=${icons[$status]}
-
-
-isPlaying() {
-    [[ $status == "Playing" ]]
-}
-
-
-# Add an icon if playing
-if isPlaying; then echo -n "  "; fi
-
-
-echo "$album: $artist - $title $icon"
-echo "$artist - $title $icon"
-
-
-# Use a different color if not playing
-if ! isPlaying; then
-    echo "#fff000"
-fi
+echo $full
+echo $short
+echo $color
+exit $status

@@ -8,20 +8,34 @@
 # - [Ross' key script](https://github.com/rosshadden/dotfiles/blob/master/src/lib/keys.sh)
 ################################
 
-
-layout=`$HOME/bin/keys get`
-
-echo $layout
-echo ${layout:0:1}
+full=""
+short=""
+color=""
+status=0
 
 
 case $BLOCK_BUTTON in
+
     # right click, toggle key variant
-    3) keys toggle && pkill -RTMIN+10 i3blocks ;;
+    3) keys toggle ;;
 
     # scroll up, change to dvorak
-    4) keys dvorak && pkill -RTMIN+10 i3blocks ;;
+    4) keys dvorak ;;
 
     # scroll down, change to qwerty
-    5) keys qwerty && pkill -RTMIN+10 i3blocks ;;
+    5) keys qwerty ;;
+
 esac
+
+
+layout=`$HOME/bin/keys get`
+
+
+full=$layout
+short=${layout:0:1}
+
+
+echo $full
+echo $short
+echo $color
+exit $status

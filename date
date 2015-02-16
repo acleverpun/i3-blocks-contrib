@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
-# date "+ %A, %B %d, %G"
-date "+ %Y-%m-%d"
-date "+ %m-%d"
+################################
+# Shows current date
+#
+# @param {String} format: The format of the date
+################################
+
+format=${BLOCK_INSTANCE:-"%Y-%m-%d"}
+
+
+date +"$format"
+date +"%m-%d"

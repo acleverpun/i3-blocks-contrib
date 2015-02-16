@@ -1,20 +1,40 @@
 #!/usr/bin/env bash
 
-# Grabs and prints information about the CPU
+################################
+# Shows info about the CPU
+################################
+
+full=""
+short=""
+color=""
+status=0
+
+
+calc() {
+	echo "$1" | bc
+}
+
 
 read cpu a b c previdle rest < /proc/stat
-prevtotal=$((a+b+c+previdle))
+prevtotal=$(calc "$a + $b + $c + $previdle")
 sleep 0.5
 read cpu a b c idle rest < /proc/stat
-total=$((a+b+c+idle))
-
-CPU=$((100 * ( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
+total=$(calc "$a + $b + $c + $idle")
 
 
-echo "$CPU%"
+CPU=$(calc "100 * (($total - $prevtotal) - ($idle - $previdle)) / ($total - $prevtotal)")
+
+
+full="$CPU%"
+short=$full
 
 if [ $CPU -ge 90 ]; then
-    echo
-    echo "#ff0000"
-    exit 33
+	color="#ff0000"
+	status=33
 fi
+
+
+echo $full
+echo $short
+echo $color
+exit $status

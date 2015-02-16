@@ -4,65 +4,72 @@
 # Shows info about sound/volume.
 # Allows simple volume controls.
 #
+# Thanks to [@EliteTK](https://gist.github.com/EliteTK/36d061fa24372fb70312),
+# for the big speed gain when switching to `ponymix`
+#
 # Dependencies:
-# - pulseaudio-ctl
+# - ponymix
 ################################
 
+full=""
+short=""
+color=""
+status=0
 
-getInfo() {
-    pulseaudio-ctl full-status | cut -f $1 -d ' '
-}
+step=${BLOCK_INSTANCE:-5}
 
 
 getVolume() {
-    getInfo 1
+	ponymix get-volume
 }
 
 
 isMuted() {
-    muteTest=`getInfo 2`
-    [[ $muteTest == 'yes' ]]
+	ponymix is-muted
 }
+
+
+case $BLOCK_BUTTON in
+
+	# right click
+	# mute/unmute
+	3) ponymix toggle >/dev/null ;;
+
+	# scroll up
+	# raise volume
+	4) ponymix increase $step >/dev/null ;;
+
+	# scroll down
+	# lower volume
+	5) ponymix decrease $step >/dev/null ;;
+
+esac
 
 
 vol=`getVolume`
 
 # determine icon
 if [ $vol -eq 0 ]; then
-    icon=
+	icon=""
 else
-    if [ $vol -le 34 ]; then
-        icon=
-    else
-        icon=
-    fi
+	if [ $vol -le 33 ]; then
+		icon=""
+	else
+		icon=""
+	fi
 fi
-
-echo "$icon $vol"
 
 # determine mute status
 if isMuted; then
-    echo
-    echo "#ff0000"
+	color="#ff0000"
+	status=33
 fi
 
-
-case $BLOCK_BUTTON in
-    # right click
-    # mute/unmute
-    3) pulseaudio-ctl mute ;;
-
-    # scroll up
-    # raise volume
-    4) pulseaudio-ctl up ;;
-
-    # scroll down
-    # lower volume
-    5) pulseaudio-ctl down ;;
-esac
+full="$icon $vol%"
+short="$vol"
 
 
-# Refresh the status
-if [[ $BLOCK_BUTTON ]]; then
-    pkill -RTMIN+10 i3blocks
-fi
+echo $full
+echo $short
+echo $color
+exit $status

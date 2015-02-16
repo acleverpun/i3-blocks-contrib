@@ -1,12 +1,33 @@
 #!/usr/bin/env bash
 
-# Prints information about a specified mount point
+################################
+# Shows info about a specified mount point
+#
+# @param {String} disk: The mount point to check
+################################
 
-FS="$(df -h $BLOCK_INSTANCE | sed -n '2 p')"; FS=($FS)
-echo ' '${FS[5]} ${FS[4]}
+full=""
+short=""
+color=""
+status=0
+
+disk=${BLOCK_INSTANCE:-/}
+
+
+FS="$(df -h $disk | sed -n '2 p')"
+FS=($FS)
+
 
 if [ ${FS[4]%?} -ge 90 ]; then
-    echo
-    echo '#47a8e9'
-    exit 33
+    color='#47a8e9'
+    status=33
 fi
+
+full="${FS[5]} ${FS[4]}"
+short="${FS[4]}"
+
+
+echo $full
+echo $short
+echo $color
+exit $status

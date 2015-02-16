@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 
-# Grabs and prints information about the weather (in Cincinnati) from accuweather.com
+################################
+# Shows info about the weather (in Cincinnati) from accuweather.com
+################################
+
+full=""
+short=""
+color=""
+status=0
+
 
 URL='http://www.accuweather.com/en/us/cincinnati-oh/45212/weather-forecast/350126'
 SITE="$(curl -s "$URL")"
@@ -24,4 +32,11 @@ else
 fi
 
 
-echo "$icon $temp"
+full="$icon $temp"
+short="$temp"
+
+
+echo $full
+echo $short
+echo $color
+exit $status

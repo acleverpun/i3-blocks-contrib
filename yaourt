@@ -7,6 +7,11 @@
 # - yaourt
 ################################
 
+full=""
+short=""
+color=""
+status=0
+
 
 # Refresh package lists
 yaourt -Sya
@@ -17,5 +22,11 @@ aurToo=$(yaourt -Qua | wc -l)
 aur=$(echo "$aurToo - $arch" | bc)
 
 
-echo "ARCH: $arch, AUR: $aur"
-echo "$arch/$aur"
+full="ARCH: $arch, AUR: $aur"
+short="$arch/$aur"
+
+
+echo $full
+echo $short
+echo $color
+exit $status
