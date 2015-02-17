@@ -21,14 +21,14 @@ if [[ ! $players ]]; then exit 0; fi
 artist=`playerctl metadata artist`
 title=`playerctl metadata title`
 album=`playerctl metadata album`
-status=`playerctl status`
+state=`playerctl status`
 
 
 if [[ $title ]]; then
 	# Determine which status icon to use
 	declare -A icons
 	icons=( ["Playing"]="" ["Paused"]="" ["Stopped"]="" )
-	icon=${icons[$status]}
+	icon=${icons[$state]}
 
 
 	if [[ $status == "Playing" ]]; then
