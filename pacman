@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+################################
+# Shows packages that need updated.
+#
+# Dependencies:
+# - checkupdates
+################################
+
+full=""
+short=""
+color=""
+status=0
+
+arch=$(checkupdates | wc -l)
+
+full="$arch"
+short="$arch"
+
+echo $full
+echo $short
+echo $color
+exit $status
