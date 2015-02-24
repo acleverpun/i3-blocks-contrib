@@ -13,16 +13,18 @@ status=0
 exec 6< /proc/meminfo
 read a total b <&6
 read a free b <&6
+read a b c <&6
+read a buffer b <&6
+read a cached b <&6
 
 
-MEM=$(echo "100 * ($total - $free) / $total" | bc)
+MEM=$(echo "100 * ($total - ($free + $buffer + $cached)) / $total" | bc)
 
 
 full="$MEM%"
 short=$full
 
 if [ $MEM -ge 80 ]; then
-    color="#ff0000"
     status=33
 fi
 
