@@ -14,8 +14,10 @@ status=0
 
 arch=$(checkupdates | wc -l)
 
-full="$arch"
-short="$arch"
+if [ $arch -ne 0 ]; then
+	full="$arch"
+	short="$arch"
+fi
 
 echo $full
 echo $short

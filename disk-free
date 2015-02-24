@@ -23,7 +23,7 @@ if [ ${FS[4]%?} -ge 90 ]; then
     status=33
 fi
 
-full="${FS[5]} ${FS[4]}"
+full="${FS[4]}"
 short="${FS[4]}"
 
 
