@@ -2,19 +2,21 @@
 
 ################################
 # Shows packages that need updated.
+# Asynchronously updates output
 #
 # Dependencies:
 # - yaourt
+#
+# @signal 10
 ################################
 
 full=""
 short=""
 color=""
-status=0
 
 
-# Refresh package lists
-yaourt -Sya
+# refresh package lists
+checkupdates
 
 
 arch=$(yaourt -Qu | wc -l)
@@ -29,4 +31,3 @@ short="$arch/$aur"
 echo $full
 echo $short
 echo $color
-exit $status
