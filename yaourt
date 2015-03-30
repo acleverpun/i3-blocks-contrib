@@ -16,7 +16,7 @@ color=""
 
 
 # refresh package lists
-checkupdates
+updates=$(checkupdates)
 
 
 arch=$(yaourt -Qu | wc -l)
