@@ -28,8 +28,7 @@ case $BLOCK_BUTTON in
 esac
 
 
-layout=`$HOME/bin/keys get`
-
+layout=$($HOME/bin/keys get)
 
 full=$layout
 short=${layout:0:1}

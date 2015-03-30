@@ -11,7 +11,7 @@ status=0
 
 
 calc() {
-	echo "$1" | bc
+	echo $1 | bc
 }
 
 
@@ -21,9 +21,7 @@ sleep 0.5
 read cpu a b c idle rest < /proc/stat
 total=$(calc "$a + $b + $c + $idle")
 
-
 CPU=$(calc "100 * (($total - $prevtotal) - ($idle - $previdle)) / ($total - $prevtotal)")
-
 
 full="$CPU%"
 short=$full

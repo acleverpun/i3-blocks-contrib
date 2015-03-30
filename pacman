@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ################################
-# Shows packages that need updated.
+# Shows pacman packages that need updated.
 #
 # Dependencies:
 # - checkupdates
@@ -12,12 +12,14 @@ short=""
 color=""
 status=0
 
+
 arch=$(checkupdates | wc -l)
 
 if [ $arch -ne 0 ]; then
-	full="$arch"
-	short="$arch"
+	full=$arch
+	short=$full
 fi
+
 
 echo $full
 echo $short

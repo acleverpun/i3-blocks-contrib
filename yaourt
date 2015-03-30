@@ -1,33 +1,30 @@
 #!/usr/bin/env bash
 
 ################################
-# Shows packages that need updated.
-# Asynchronously updates output
+# Shows AUR packages that need updated.
 #
 # Dependencies:
+# - checkupdates
 # - yaourt
-#
-# @signal 10
 ################################
 
 full=""
 short=""
 color=""
+status=0
 
 
-# refresh package lists
-updates=$(checkupdates)
-
-
-arch=$(yaourt -Qu | wc -l)
-aurToo=$(yaourt -Qua | wc -l)
+arch=$(checkupdates | wc -l)
+archAndAur=$(yaourt -Qua | wc -l)
 aur=$(echo "$aurToo - $arch" | bc)
 
-
-full="ARCH: $arch, AUR: $aur"
-short="$arch/$aur"
+if [ $aur -ne 0 ]; then
+    full=$aur
+    short=$full
+fi
 
 
 echo $full
 echo $short
 echo $color
+exit $status

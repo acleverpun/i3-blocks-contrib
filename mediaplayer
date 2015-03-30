@@ -14,22 +14,20 @@ status=0
 
 
 # Exit if no player found
-players=`playerctl -l`
+players=$(playerctl -l)
 if [[ ! $players ]]; then exit 0; fi
 
 
-artist=`playerctl metadata artist`
-title=`playerctl metadata title`
-album=`playerctl metadata album`
-state=`playerctl status`
-
+artist=$(playerctl metadata artist)
+title=$(playerctl metadata title)
+album=$(playerctl metadata album)
+state=$(playerctl status)
 
 if [[ $title ]]; then
 	# Determine which status icon to use
 	declare -A icons
 	icons=( ["Playing"]="" ["Paused"]="" ["Stopped"]="" )
 	icon=${icons[$state]}
-
 
 	if [[ $status == "Playing" ]]; then
 		# Add an icon if playing
@@ -38,7 +36,6 @@ if [[ $title ]]; then
 		# Use a different color if not playing
 		color="#fff000"
 	fi
-
 
 	full="$album: $artist - $title $icon"
 	short="$artist - $title $icon"
