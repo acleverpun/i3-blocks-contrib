@@ -5,6 +5,7 @@
 #
 # Dependencies:
 # - checkupdates
+# - notify-send
 ################################
 
 full=""
@@ -13,15 +14,24 @@ color=""
 status=0
 
 
-arch=$(checkupdates | wc -l)
+packages=`checkupdates`
+numPackages=$(echo "$packages" | wc -l)
 
-if [ $arch -ne 0 ]; then
-	full=$arch
-	short=$full
-fi
+full=$numPackages
+short=$full
 
 
 echo $full
 echo $short
 echo $color
+
+
+case $BLOCK_BUTTON in
+
+	# right click: show packages
+	3) notify-send "Pacman Packages" "$packages" ;;
+
+esac
+
+
 exit $status

@@ -6,6 +6,7 @@
 # Dependencies:
 # - checkupdates
 # - yaourt
+# - notify-send
 ################################
 
 full=""
@@ -14,14 +15,30 @@ color=""
 status=0
 
 
-arch=$(checkupdates | wc -l)
-archAndAur=$(yaourt -Qua | wc -l)
-aur=$(echo "$aurToo - $arch" | bc)
+archPackages=$(checkupdates)
+allPackages=$(yaourt -Quaq)
+numArchPackages=$(echo "$archPackages" | wc -l)
+numAllPackages=$(echo "$allPackages" | wc -l)
+numAurPackages=$(echo "$numAllPackages - $numArchPackages" | bc)
 
-if [ $aur -ne 0 ]; then
-    full=$aur
-    short=$full
+if [ $numAllPackages -le $numArchPackages ]; then
+	numAurPackages=$numAllPackages
 fi
+
+full=$numAurPackages
+short=$full
+
+
+case $BLOCK_BUTTON in
+
+	# right click: show packages
+	# TODO: only show AUR packages
+	3)
+		aurPackages=$(diff <(echo "$archPackages") <(echo "$allPackages") | tail -n+2 | cut -c 3-)
+		notify-send "AUR Packages" "$aurPackages"
+	;;
+
+esac
 
 
 echo $full

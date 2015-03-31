@@ -16,13 +16,13 @@ status=0
 
 case $BLOCK_BUTTON in
 
-    # right click, toggle key variant
+    # right click: toggle key variant
     3) keys toggle ;;
 
-    # scroll up, change to dvorak
+    # scroll up: change to dvorak
     4) keys dvorak ;;
 
-    # scroll down, change to qwerty
+    # scroll down: change to qwerty
     5) keys qwerty ;;
 
 esac
