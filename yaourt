@@ -34,7 +34,7 @@ case $BLOCK_BUTTON in
 	# right click: show packages
 	# TODO: only show AUR packages
 	3)
-		aurPackages=$(diff <(echo "$archPackages") <(echo "$allPackages") | tail -n+2 | cut -c 3-)
+		aurPackages=$(diff -y <(echo "$archPackages") <(echo "$allPackages") | awk -p '{ print $3 }')
 		notify-send "AUR Packages" "$aurPackages"
 	;;
 
