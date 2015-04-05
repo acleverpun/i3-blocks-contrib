@@ -17,9 +17,9 @@ status=0
 
 archPackages=$(checkupdates)
 allPackages=$(yaourt -Quaq)
-numArchPackages=$(echo "$archPackages" | wc -l)
-numAllPackages=$(echo "$allPackages" | wc -l)
-numAurPackages=$(echo "$numAllPackages - $numArchPackages" | bc)
+numArchPackages=$(echo -n "$archPackages" | wc -l)
+numAllPackages=$(echo -n "$allPackages" | wc -l)
+numAurPackages=$(echo -n "$numAllPackages - $numArchPackages" | bc)
 
 if [ $numAllPackages -le $numArchPackages ]; then
 	numAurPackages=$numAllPackages
@@ -35,7 +35,7 @@ case $BLOCK_BUTTON in
 	# TODO: only show AUR packages
 	3)
 		aurPackages=$(diff -y <(echo "$archPackages") <(echo "$allPackages") | awk -p '{ print $3 }')
-		notify-send "AUR Packages" "$aurPackages"
+		notify-send "AUR packages" "$aurPackages"
 	;;
 
 esac

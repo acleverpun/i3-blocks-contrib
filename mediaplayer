@@ -24,9 +24,13 @@ album=$(playerctl metadata album)
 state=$(playerctl status)
 
 if [[ $title ]]; then
-	# Determine which status icon to use
+	# Make icon mapping
 	declare -A icons
-	icons=( ["Playing"]="" ["Paused"]="" ["Stopped"]="" )
+	icons["Playing"]=""
+	icons["Paused"]=""
+	icons["Stopped"]=""
+
+	# Determine which status icon to use
 	icon=${icons[$state]}
 
 	if [[ $status == "Playing" ]]; then

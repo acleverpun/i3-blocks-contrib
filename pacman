@@ -14,8 +14,8 @@ color=""
 status=0
 
 
-packages=`checkupdates`
-numPackages=$(echo "$packages" | wc -l)
+packages=$(checkupdates)
+numPackages=$(echo -n "$packages" | wc -l)
 
 full=$numPackages
 short=$full
@@ -29,7 +29,7 @@ echo $color
 case $BLOCK_BUTTON in
 
 	# right click: show packages
-	3) notify-send "Pacman Packages" "$packages" ;;
+	3) notify-send "Pacman packages" "$packages" ;;
 
 esac
 
