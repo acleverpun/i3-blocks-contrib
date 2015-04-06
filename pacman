@@ -14,8 +14,17 @@ color=""
 status=0
 
 
+getNum() {
+	if [[ $1 == "" ]]; then
+		echo 0
+	else
+		echo "$1" | wc -l
+	fi
+}
+
+
 packages=$(checkupdates)
-numPackages=$(echo -n "$packages" | wc -l)
+numPackages=$(getNum "$packages")
 
 full=$numPackages
 short=$full

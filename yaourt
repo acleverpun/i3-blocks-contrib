@@ -15,10 +15,19 @@ color=""
 status=0
 
 
+getNum() {
+	if [[ $1 == "" ]]; then
+		echo 0
+	else
+		echo "$1" | wc -l
+	fi
+}
+
+
 archPackages=$(checkupdates)
 allPackages=$(yaourt -Quaq)
-numArchPackages=$(echo -n "$archPackages" | wc -l)
-numAllPackages=$(echo -n "$allPackages" | wc -l)
+numArchPackages=$(getNum "$archPackages")
+numAllPackages=$(getNum "$allPackages")
 numAurPackages=$(echo -n "$numAllPackages - $numArchPackages" | bc)
 
 if [ $numAllPackages -le $numArchPackages ]; then
