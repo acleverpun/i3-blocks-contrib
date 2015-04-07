@@ -3,9 +3,16 @@
 ################################
 # Shows info from media players.
 #
+# TODO: make output format configurable
+#
 # Dependencies:
 # - playerctl
+#
+# @return {String}: Current media info
 ################################
+
+dir=$(dirname $0)
+source $dir/util.sh
 
 full=""
 short=""

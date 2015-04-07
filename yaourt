@@ -6,8 +6,13 @@
 # Dependencies:
 # - checkupdates
 # - yaourt
-# - notify-send
+# - [notify-send]
+#
+# @return {Number}: Outdated packages
 ################################
+
+dir=$(dirname $0)
+source $dir/util.sh
 
 full=""
 short=""
@@ -15,20 +20,11 @@ color=""
 status=0
 
 
-getNum() {
-	if [[ $1 == "" ]]; then
-		echo 0
-	else
-		echo "$1" | wc -l
-	fi
-}
-
-
 archPackages=$(checkupdates)
 allPackages=$(yaourt -Quaq)
-numArchPackages=$(getNum "$archPackages")
-numAllPackages=$(getNum "$allPackages")
-numAurPackages=$(echo -n "$numAllPackages - $numArchPackages" | bc)
+numArchPackages=$(numLines "$archPackages")
+numAllPackages=$(numLines "$allPackages")
+numAurPackages=$(calc "$numAllPackages - $numArchPackages")
 
 if [ $numAllPackages -le $numArchPackages ]; then
 	numAurPackages=$numAllPackages
@@ -39,14 +35,11 @@ short=$full
 
 
 case $BLOCK_BUTTON in
-
 	# right click: show packages
-	# TODO: only show AUR packages
 	3)
 		aurPackages=$(diff -y <(echo "$archPackages") <(echo "$allPackages") | awk -p '{ print $3 }')
 		notify-send "AUR packages" "$aurPackages"
 	;;
-
 esac
 
 

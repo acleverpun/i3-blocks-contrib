@@ -5,8 +5,13 @@
 #
 # Dependencies:
 # - checkupdates
-# - notify-send
+# - [notify-send]
+#
+# @return {Number}: Outdated packages
 ################################
+
+dir=$(dirname $0)
+source $dir/util.sh
 
 full=""
 short=""
@@ -14,17 +19,8 @@ color=""
 status=0
 
 
-getNum() {
-	if [[ $1 == "" ]]; then
-		echo 0
-	else
-		echo "$1" | wc -l
-	fi
-}
-
-
 packages=$(checkupdates)
-numPackages=$(getNum "$packages")
+numPackages=$(numLines "$packages")
 
 full=$numPackages
 short=$full
@@ -36,10 +32,8 @@ echo $color
 
 
 case $BLOCK_BUTTON in
-
 	# right click: show packages
 	3) notify-send "Pacman packages" "$packages" ;;
-
 esac
 
 

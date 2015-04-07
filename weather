@@ -2,7 +2,16 @@
 
 ################################
 # Shows info about the weather (in Cincinnati) from accuweather.com
+#
+# TODO: completely rewrite, probably using openweather APIs
+# TODO: make location configurable
+# TODO: make temperature unit configurable
+#
+# @return {Number(degrees Fahrenheit)}: Current temperature in Cincinnati
 ################################
+
+dir=$(dirname $0)
+source $dir/util.sh
 
 full=""
 short=""

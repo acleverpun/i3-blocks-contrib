@@ -9,7 +9,12 @@
 #
 # Dependencies:
 # - ponymix
+#
+# @return {Number}: Current volume
 ################################
+
+dir=$(dirname $0)
+source $dir/util.sh
 
 full=""
 short=""
@@ -23,14 +28,12 @@ getVolume() {
 	ponymix get-volume
 }
 
-
 isMuted() {
 	ponymix is-muted
 }
 
 
 case $BLOCK_BUTTON in
-
 	# right click
 	# mute/unmute
 	3) ponymix toggle >/dev/null ;;
@@ -42,7 +45,6 @@ case $BLOCK_BUTTON in
 	# scroll down
 	# lower volume
 	5) ponymix decrease $step >/dev/null ;;
-
 esac
 
 

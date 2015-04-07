@@ -6,7 +6,12 @@
 #
 # Dependencies:
 # - [Ross' key script](https://github.com/rosshadden/dotfiles/blob/master/src/lib/keys.sh)
+#
+# @return {String}: Current keyboard layout
 ################################
+
+dir=$(dirname $0)
+source $dir/util.sh
 
 full=""
 short=""

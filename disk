@@ -3,8 +3,15 @@
 ################################
 # Shows info about a specified mount point
 #
+# Dependencies:
+# - [notify-send]
+#
 # @param {String} disk: The mount point to check
+# @return {Number(%)}: Space used on the disk
 ################################
+
+dir=$(dirname $0)
+source $dir/util.sh
 
 full=""
 short=""
@@ -24,6 +31,15 @@ fi
 
 full=${FS[4]}
 short=$full
+
+
+case $BLOCK_BUTTON in
+	# right click: show packages
+	3)
+		summary=$(du -h --max-depth=1 $disk)
+		notify-send "Disk usage" "$summary"
+	;;
+esac
 
 
 echo $full

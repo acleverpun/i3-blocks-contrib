@@ -4,7 +4,11 @@
 # Shows current date
 #
 # @param {String} format: The format of the date
+# @return {Date}: Current date
 ################################
+
+dir=$(dirname $0)
+source $dir/util.sh
 
 format=${BLOCK_INSTANCE:-"%Y-%m-%d"}
 

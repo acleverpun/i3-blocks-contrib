@@ -2,17 +2,20 @@
 
 ################################
 # Shows info about the CPU
+#
+# Dependencies:
+# - [notify-send]
+#
+# @return {Number(%)}: CPU usage
 ################################
+
+dir=$(dirname $0)
+source $dir/util.sh
 
 full=""
 short=""
 color=""
 status=0
-
-
-calc() {
-	echo "$1" | bc
-}
 
 
 read cpu a b c previdle rest < /proc/stat
@@ -30,6 +33,18 @@ if [ $CPU -ge 90 ]; then
 	color="#ff0000"
 	status=33
 fi
+
+
+case $BLOCK_BUTTON in
+
+	# right click: show packages
+	3)
+		n=16
+		summary=$(ps -eo pcpu,pmem,pid,comm --sort=-pcpu | head -$n)
+		notify-send "Top $n CPU-eaters" "$summary"
+	;;
+
+esac
 
 
 echo $full

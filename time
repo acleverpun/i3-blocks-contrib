@@ -4,7 +4,11 @@
 # Shows current time
 #
 # @param {String} format: The format of the time
+# @return {Time}: Current time
 ################################
+
+dir=$(dirname $0)
+source $dir/util.sh
 
 format=${BLOCK_INSTANCE:-"%H:%M:%S"}
 

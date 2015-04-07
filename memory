@@ -2,7 +2,15 @@
 
 ################################
 # Shows info about the RAM
+#
+# Dependencies:
+# - [notify-send]
+#
+# @return {Number(%)}: RAM usage
 ################################
+
+dir=$(dirname $0)
+source $dir/util.sh
 
 full=""
 short=""
@@ -18,7 +26,7 @@ read a buffer b <&6
 read a cached b <&6
 
 
-MEM=$(echo "100 * ($total - ($free + $buffer + $cached)) / $total" | bc)
+MEM=$(calc "100 * ($total - ($free + $buffer + $cached)) / $total")
 
 
 full="$MEM%"
@@ -27,6 +35,16 @@ short=$full
 if [ $MEM -ge 80 ]; then
     status=33
 fi
+
+
+case $BLOCK_BUTTON in
+	# right click: show packages
+	3)
+		n=16
+		summary=$(ps -eo pmem,pcpu,pid,comm --sort=-pmem | head -$n)
+		notify-send "Top $n RAM-eaters" "$summary"
+	;;
+esac
 
 
 echo $full

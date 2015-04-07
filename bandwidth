@@ -4,7 +4,11 @@
 # Shows bandwidth
 #
 # @param {String(tx|rx)} type: The bandwidth type to check
+# @return {Number(kB/s)}: Speed of the interface
 ################################
+
+dir=$(dirname $0)
+source $dir/util.sh
 
 type=$BLOCK_INSTANCE
 
@@ -26,8 +30,8 @@ for iface in $(ls -1 $netdir); do
 	cur=$(expr $cur + $n)
 done
 
-delta=$(echo "$cur - $prev" | bc)
-echo "$(echo "$delta / 1000" | bc) kB/s"
+delta=$(calc "$cur - $prev")
+echo "$(calc "$delta / 1000") kB/s"
 
 # store result
 echo $cur > $file

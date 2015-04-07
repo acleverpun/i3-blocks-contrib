@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
 ################################
-# Shows ip address of a given interface
+# Shows IP address of a given interface
 #
 # @param {String} interface: The network interface to check
+# @return {String(IP)}: IP address of the interface
 ################################
+
+dir=$(dirname $0)
+source $dir/util.sh
 
 full=""
 short=""

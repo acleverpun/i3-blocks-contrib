@@ -5,7 +5,12 @@
 #
 # Dependencies:
 # - acpi
+#
+# @return {Number(%)}: Current battery charge
 ################################
+
+dir=$(dirname $0)
+source $dir/util.sh
 
 full=""
 short=""
