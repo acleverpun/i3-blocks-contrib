@@ -9,6 +9,7 @@
 #
 # Dependencies:
 # - ponymix
+# - ttf-font-icons
 #
 # @return {Number}: Current volume
 ################################
@@ -50,15 +51,15 @@ esac
 
 vol=$(getVolume)
 
-# determine icon
-if [ $vol -eq 0 ]; then
+# level-based icon
+if (( $vol == 0 )); then
 	icon=""
+elif (( $vol < 34 )); then
+	icon=""
+elif (( $vol < 67 )); then
+	icon=""
 else
-	if [ $vol -le 33 ]; then
-		icon=""
-	else
-		icon=""
-	fi
+	icon=""
 fi
 
 # determine mute status
