@@ -1,119 +1,18 @@
-Example config:
+# i3-blocks-contrib
 
-```
-# defaults
-separator_block_width=16
-command=$HOME/.config/i3/blocks/$BLOCK_NAME
+A collection of useful blocks for [i3blocks](https://github.com/vivien/i3blocks), for the amazing [i3](https://i3wm.org) window manager.
 
 
-[mediaplayer]
-color=#00ffaf
-interval=2
-signal=11
+## Configuration
+
+Some examples on how to configure these in your `i3blocks` config file:
+
+- @rosshadden's [i3blocks.conf](https://github.com/rosshadden/dotfiles/blob/master/src/.config/i3/i3blocks.conf)
+- @oppenlander's [i3blocks.conf](https://github.com/oppenlander/dotfiles/blob/master/i3/i3blocks.conf)
 
 
-[weather]
-align=right
-color=#ff5f00
-interval=1800
+## Contributing
 
-
-[keyboard]
-interval=1
-label=
-signal=10
-
-
-[yaourt]
-interval=7200
-label=
-signal=10
-
-
-[cpu]
-align=center
-color=#ffff00
-interval=3
-label=
-min_width="100%"
-
-
-[memory]
-align=center
-color=#00ffaf
-interval=3
-label=
-min_width="100%"
-
-
-[disk-root]
-command=$HOME/.config/i3/blocks/disk-free
-instance=/
-interval=60
-separator=false
-
-
-[disk-data]
-command=$HOME/.config/i3/blocks/disk-free
-instance=/media/data
-interval=60
-
-
-[download]
-align=right
-color=#00afff
-command=$HOME/.config/i3/blocks/bandwidth rx
-interval=1 # IMPORTANT
-label=
-min_width="000 kB/s"
-
-
-[upload]
-align=right
-color=#ff5f5f
-command=$HOME/.config/i3/blocks/bandwidth tx
-interval=1 # IMPORTANT
-label=
-min_width="000 kB/s"
-
-
-[ethernet]
-color=#875fd7
-command=$HOME/.config/i3/blocks/network
-instance=enp*
-interval=once
-label=
-
-
-[wireless]
-color=#5f00af
-command=$HOME/.config/i3/blocks/network
-instance=wlp*
-interval=once
-label=
-
-
-[battery]
-color=#66ff33
-interval=30
-
-
-[sound]
-align=right
-color=#ffff00
-instance=Master
-interval=once
-signal=11
-
-
-[date]
-interval=3600
-label=
-min_width=0000-00-00
-
-
-[time]
-label=
-min_width=00:00:00
-interval=1
-```
+As hinted by the name, this is intended to be openly contributed to by the community.
+There is no official contributing guide, but please try to fit in to the style and themes found in our existing blocks.
+We use a somewhat ad-hock [YUIDoc](http://yui.github.io/yuidoc/) documentation syntax.
