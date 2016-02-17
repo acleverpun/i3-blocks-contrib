@@ -19,7 +19,6 @@ short=""
 color=""
 status=0
 
-
 archPackages=$(checkupdates)
 allPackages=$(yaourt -Quaq)
 numArchPackages=$(numLines "$archPackages")
@@ -33,7 +32,6 @@ fi
 full=$numAurPackages
 short=$full
 
-
 case $BLOCK_BUTTON in
 	# right click: show packages
 	3)
@@ -41,7 +39,6 @@ case $BLOCK_BUTTON in
 		notify-send "AUR packages" "$aurPackages"
 	;;
 esac
-
 
 echo $full
 echo $short

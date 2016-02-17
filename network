@@ -17,7 +17,6 @@ status=0
 
 interface=${BLOCK_INSTANCE:-"eth0"}
 
-
 netPath=/sys/class/net
 interfacePath=$(echo $netPath/$interface)
 # Expand wildcard interfaces
@@ -32,7 +31,6 @@ if [ $state == "up" ]; then
 	full=$ip
 	short=$full
 fi
-
 
 echo $full
 echo $short

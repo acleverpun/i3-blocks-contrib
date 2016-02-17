@@ -17,7 +17,6 @@ short=""
 color=""
 status=0
 
-
 read cpu a b c previdle rest < /proc/stat
 prevtotal=$(calc "$a + $b + $c + $previdle")
 sleep 0.5
@@ -34,7 +33,6 @@ if [ $CPU -ge 90 ]; then
 	status=33
 fi
 
-
 case $BLOCK_BUTTON in
 
 	# right click: show packages
@@ -45,7 +43,6 @@ case $BLOCK_BUTTON in
 	;;
 
 esac
-
 
 echo $full
 echo $short

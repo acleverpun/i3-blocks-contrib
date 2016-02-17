@@ -18,23 +18,19 @@ short=""
 color=""
 status=0
 
-
 packages=$(checkupdates)
 numPackages=$(numLines "$packages")
 
 full=$numPackages
 short=$full
 
-
 echo $full
 echo $short
 echo $color
-
 
 case $BLOCK_BUTTON in
 	# right click: show packages
 	3) notify-send "Pacman packages" "$packages" ;;
 esac
-
 
 exit $status

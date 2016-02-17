@@ -12,6 +12,5 @@ source $dir/util.sh
 
 format=${BLOCK_INSTANCE:-"%Y-%m-%d"}
 
-
 date +"$format"
 date +"%m-%d"

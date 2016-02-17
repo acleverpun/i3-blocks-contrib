@@ -24,7 +24,6 @@ status=0
 
 step=${BLOCK_INSTANCE:-5}
 
-
 getVolume() {
 	ponymix get-volume
 }
@@ -32,7 +31,6 @@ getVolume() {
 isMuted() {
 	ponymix is-muted
 }
-
 
 case $BLOCK_BUTTON in
 	# right click
@@ -47,7 +45,6 @@ case $BLOCK_BUTTON in
 	# lower volume
 	5) ponymix decrease $step >/dev/null ;;
 esac
-
 
 vol=$(getVolume)
 
@@ -70,7 +67,6 @@ fi
 
 full="$icon $vol%"
 short=$vol
-
 
 echo $full
 echo $short

@@ -17,14 +17,11 @@ short=""
 color=""
 status=0
 
-
 # Exit if no battery was found
 if [ "$(acpi)" == "" ]; then exit 0; fi
 
-
 state=$(acpi | sed -n 's/Battery [0-9]: \([A-Z]\).*, .*/\1/p')
 chg=$(acpi | sed -n 's/Battery [0-9]:.*, \([0-9]\{1,3\}\)%.*/\1/p')
-
 
 # Charging or Unknown
 if [ $state = "C" ] || [ $state = "U" ]; then

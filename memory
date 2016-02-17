@@ -17,7 +17,6 @@ short=""
 color=""
 status=0
 
-
 exec 6< /proc/meminfo
 read a total b <&6
 read a free b <&6
@@ -25,9 +24,7 @@ read a b c <&6
 read a buffer b <&6
 read a cached b <&6
 
-
 MEM=$(calc "100 * ($total - ($free + $buffer + $cached)) / $total")
-
 
 full="$MEM%"
 short=$full
@@ -35,7 +32,6 @@ short=$full
 if [ $MEM -ge 80 ]; then
     status=33
 fi
-
 
 case $BLOCK_BUTTON in
 	# right click: show packages
@@ -45,7 +41,6 @@ case $BLOCK_BUTTON in
 		notify-send "Top $n RAM-eaters" "$summary"
 	;;
 esac
-
 
 echo $full
 echo $short
