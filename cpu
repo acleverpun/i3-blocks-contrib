@@ -14,7 +14,6 @@ source $dir/util.sh
 
 full=""
 short=""
-color=""
 status=0
 
 read cpu a b c previdle rest < /proc/stat
@@ -29,7 +28,6 @@ full="$CPU%"
 short=$full
 
 if [ $CPU -ge 90 ]; then
-	color="#ff0000"
 	status=33
 fi
 
@@ -46,5 +44,4 @@ esac
 
 echo $full
 echo $short
-echo $color
 exit $status

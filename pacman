@@ -15,7 +15,6 @@ source $dir/util.sh
 
 full=""
 short=""
-color=""
 status=0
 
 packages=$(checkupdates)
@@ -26,7 +25,6 @@ short=$full
 
 echo $full
 echo $short
-echo $color
 
 case $BLOCK_BUTTON in
 	# right click: show packages

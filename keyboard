@@ -15,7 +15,6 @@ source $dir/util.sh
 
 full=""
 short=""
-color=""
 status=0
 
 case $BLOCK_BUTTON in
@@ -34,5 +33,4 @@ short=${layout:0:1}
 
 echo $full
 echo $short
-echo $color
 exit $status

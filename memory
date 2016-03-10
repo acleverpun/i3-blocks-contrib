@@ -14,7 +14,6 @@ source $dir/util.sh
 
 full=""
 short=""
-color=""
 status=0
 
 exec 6< /proc/meminfo
@@ -44,5 +43,4 @@ esac
 
 echo $full
 echo $short
-echo $color
 exit $status

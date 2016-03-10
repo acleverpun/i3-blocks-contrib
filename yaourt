@@ -16,7 +16,6 @@ source $dir/util.sh
 
 full=""
 short=""
-color=""
 status=0
 
 archPackages=$(checkupdates)
@@ -42,5 +41,4 @@ esac
 
 echo $full
 echo $short
-echo $color
 exit $status

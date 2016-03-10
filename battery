@@ -14,7 +14,6 @@ source $dir/util.sh
 
 full=""
 short=""
-color=""
 status=0
 
 # Exit if no battery was found
@@ -40,5 +39,4 @@ short="$chg%"
 
 echo $full
 echo $short
-echo $color
 exit $status

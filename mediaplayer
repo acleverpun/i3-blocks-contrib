@@ -16,7 +16,6 @@ source $dir/util.sh
 
 full=""
 short=""
-color=""
 status=0
 
 # Exit if no player found
@@ -44,5 +43,4 @@ fi
 
 echo $full
 echo $short
-echo $color
 exit $status

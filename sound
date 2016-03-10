@@ -19,7 +19,6 @@ source $dir/util.sh
 
 full=""
 short=""
-color=""
 status=0
 
 step=${BLOCK_INSTANCE:-5}
@@ -61,7 +60,6 @@ fi
 
 # determine mute status
 if isMuted; then
-	color="#ff0000"
 	status=33
 fi
 
@@ -70,5 +68,4 @@ short=$vol
 
 echo $full
 echo $short
-echo $color
 exit $status
