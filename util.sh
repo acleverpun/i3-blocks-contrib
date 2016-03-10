@@ -18,9 +18,24 @@ calc() {
 # @return {Number}: The number of lines
 ################################
 numLines() {
-	if [[ $1 == "" ]]; then
+	if [[ "$1" == "" ]]; then
 		echo 0
 	else
 		echo "$1" | wc -l
 	fi
+}
+
+cacheDir=".cache"
+cacheFile="$cacheDir/i3-blocks-contrib-${BLOCK_NAME}"
+
+if [[ -z $cacheDir ]]; then
+	mkdir $cacheDir
+fi
+
+getCache() {
+	cat $cacheFile || echo $1
+}
+
+setCache() {
+	echo "$1" > $cacheFile
 }
