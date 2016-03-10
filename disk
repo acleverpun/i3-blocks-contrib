@@ -20,7 +20,38 @@ status=0
 disks=$(lsblk | tail -n +2 | awk '{ print $7 }' | sed '/^\s*$/d' | sort)
 let numDisks=$(echo "$disks" | wc -l)
 let diskNum=$(getCache 1)
-disk=$(echo "$disks" | sed -n "$diskNum p")
+
+getDisk() {
+	echo "$disks" | sed -n "$diskNum p"
+}
+disk=$(getDisk)
+
+case $BLOCK_BUTTON in
+	# right click: show details
+	# TODO: fix
+	3)
+		local summary=$(du -h --max-depth=1 $disk)
+		notify-send "Disk usage" "$summary"
+	;;
+	# scroll up: cycle disks
+	4)
+		diskNum=$[$(getCache) - 1]
+		if (( diskNum <= 0 )); then
+			diskNum=$numDisks
+		fi
+		setCache $diskNum
+		disk=$(getDisk)
+	;;
+	5)
+	# scroll down: cycle disks
+		diskNum=$[$(getCache) + 1]
+		if (( diskNum >= numDisks + 1 )); then
+			diskNum=1
+		fi
+		setCache $diskNum
+		disk=$(getDisk)
+	;;
+esac
 
 usage=$(df -h $disk | sed -n '2 p')
 usage=($usage)
@@ -31,30 +62,6 @@ fi
 
 full="$disk ${usage[4]}"
 short="$full"
-
-case $BLOCK_BUTTON in
-	# right click: show details
-	3)
-		local summary=$(du -h --max-depth=1 $disk)
-		notify-send "Disk usage" "$summary"
-	;;
-	# scroll up: cycle disks
-	4)
-		let diskNum=$[$(getCache) - 1]
-		if (( diskNum <= 0 )); then
-			diskNum=$numDisks
-		fi
-		setCache $diskNum
-	;;
-	5)
-	# scroll down: cycle disks
-		let diskNum=$[$(getCache) + 1]
-		if (( diskNum >= numDisks )); then
-			diskNum=1
-		fi
-		setCache $diskNum
-	;;
-esac
 
 echo $full
 echo $short
