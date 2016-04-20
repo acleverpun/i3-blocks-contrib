@@ -27,7 +27,7 @@ title=$(playerctl metadata title)
 album=$(playerctl metadata album)
 state=$(playerctl status)
 
-if [[ $title ]]; then
+if [[ "$title" ]]; then
 	# Make icon mapping
 	declare -A icons
 	icons["Playing"]=""
@@ -37,8 +37,12 @@ if [[ $title ]]; then
 	# Determine which icon to use
 	icon=${icons[$state]}
 
-	full="$artist - $title [$album] $icon"
-	short="$artist - $title $icon"
+	full="$title"
+	if [[ "$artist" ]]; then full="$artist - $full"; fi
+
+	short="$full $icon"
+	if [[ "$album" ]]; then full="$full [$album]"; fi
+	full="$full $icon"
 fi
 
 echo $full

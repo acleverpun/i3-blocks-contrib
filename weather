@@ -21,7 +21,7 @@ URL='http://www.accuweather.com/en/us/cincinnati-oh/45212/weather-forecast/35012
 SITE="$(curl -s "$URL")"
 
 weather="$(echo "$SITE" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $14 }'| head -1)"
-temp="$(echo "$SITE" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $12"°" }'| head -1)"
+temp="$(echo "$SITE" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $12 }'| head -1)"
 
 if [[ $weather == *thunder* || $weather == *Thunder* ]]; then
     icon=""
@@ -37,8 +37,8 @@ else
     fi
 fi
 
-full="$icon $temp"
-short="$temp"
+full="$icon $temp°"
+short="$temp°"
 
 echo $full
 echo $short
