@@ -7,9 +7,6 @@
 # @return {Time}: Current time
 ################################
 
-dir=$(dirname $0)
-source $dir/util.sh
-
 format=${BLOCK_INSTANCE:-"%H:%M:%S"}
 
 date +"$format"

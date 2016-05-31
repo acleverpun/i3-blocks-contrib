@@ -29,7 +29,7 @@ full="$MEM%"
 short=$full
 
 if [ $MEM -ge 80 ]; then
-    status=33
+	status=33
 fi
 
 case $BLOCK_BUTTON in

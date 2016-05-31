@@ -10,8 +10,7 @@
 # @return {String}: Current keyboard layout
 ################################
 
-dir=$(dirname $0)
-source $dir/util.sh
+keys=$HOME/bin/keys
 
 full=""
 short=""
@@ -19,14 +18,14 @@ status=0
 
 case $BLOCK_BUTTON in
 	# right click: toggle key variant
-	3) keys toggle ;;
+	3) $keys toggle ;;
 	# scroll up: change to dvorak
-	4) keys dvorak ;;
+	4) $keys dvorak ;;
 	# scroll down: change to qwerty
-	5) keys qwerty ;;
+	5) $keys qwerty ;;
 esac
 
-layout=$($HOME/bin/keys get)
+layout=$($keys get)
 
 full=$layout
 short=${layout:0:1}

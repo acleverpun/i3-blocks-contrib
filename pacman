@@ -3,7 +3,7 @@
 ################################
 # Shows pacman packages that need updated.
 #
-# Dependencies:
+# dependencies:
 # - checkupdates
 # - [notify-send]
 #

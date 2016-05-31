@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+################################
+# Shows AUR packages that need updated.
+#
+# Dependencies:
+# - checkupdates
+# - bauerbill
+# - [notify-send]
+#
+# @return {Number}: Outdated packages
+################################
+
+dir=$(dirname $0)
+source $dir/util.sh
+
+full=""
+short=""
+status=0
+
+archPackages=$(checkupdates)
+allPackages=$(bauerbill -Quq)
+numArchPackages=$(numLines "$archPackages")
+numAllPackages=$(numLines "$allPackages")
+numAurPackages=$(calc "$numAllPackages - $numArchPackages")
+
+if [ $numAllPackages -le $numArchPackages ]; then
+	numAurPackages=$numAllPackages
+fi
+
+full=$numAurPackages
+short=$full
+
+case $BLOCK_BUTTON in
+	# right click: show packages
+	3)
+		aurPackages=$(diff -y <(echo "$archPackages") <(echo "$allPackages") | awk -p '{ print $3 }')
+		notify-send "AUR packages" "$aurPackages"
+	;;
+esac
+
+echo $full
+echo $short
+exit $status
