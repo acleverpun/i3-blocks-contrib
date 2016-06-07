@@ -10,7 +10,7 @@
 # @return {Number}: Outdated packages
 ################################
 
-dir=$(dirname $0)
+dir=$(dirname "$0")
 source $dir/util.sh
 
 full=""
@@ -23,8 +23,8 @@ numPackages=$(numLines "$packages")
 full=$numPackages
 short=$full
 
-echo $full
-echo $short
+echo "$full"
+echo "$short"
 
 case $BLOCK_BUTTON in
 	# right click: show packages
