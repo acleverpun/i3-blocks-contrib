@@ -29,10 +29,14 @@ else
     if [[ $weather == *rain* || $weather == *Rain* ]]; then
         icon=""
     else
-        if [[ $weather == *cloud* || $weather == *Cloud* ]]; then
-            icon=""
+        if [[ $weather == *snow* || $weather == *Snow* ]]; then
+                icon="❄"
         else
-            icon=""
+            if [[ $weather == *cloud* || $weather == *Cloud* ]]; then
+                icon=""
+            else
+                icon=""
+            fi
         fi
     fi
 fi
