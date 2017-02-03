@@ -8,13 +8,13 @@
 ################################
 
 dir=$(dirname $0)
-source $dir/util.sh
+source "$dir/util.sh"
 
 full=""
 short=""
 status=0
 
-interface=${BLOCK_INSTANCE:-"eth0"}
+interface=${BLOCK_INSTANCE:-eth0}
 
 netPath=/sys/class/net
 interfacePath=$(echo $netPath/$interface)
@@ -31,6 +31,6 @@ if [ $state == "up" ]; then
 	short=$full
 fi
 
-echo $full
-echo $short
+echo "$full"
+echo "$short"
 exit $status

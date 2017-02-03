@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+################################
+# Shows info from media players.
+#
+# Dependencies:
+# - mpc
+#
+# @return {String}: Current media info
+################################
+
+full=""
+short=""
+status=0
+
+format=${BLOCK_INSTANCE:-'[[%artist% - ]%title%[ \[%album%\]]]|[%file%]'}
+
+current=$(mpc current)
+currentLong=$(mpc current -f "$format")
+state=playing
+
+if [[ "$current" ]]; then
+	# Make icon mapping
+	declare -A icons
+	icons["playing"]=""
+	icons["paused"]=""
+	icons["stopped"]=""
+
+	# Determine which icon to use
+	icon=${icons[$state]}
+
+	full="$currentLong $icon"
+	short="$current $icon"
+fi
+
+echo "$full"
+echo "$short"
+exit "$status"
